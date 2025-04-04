@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Pessoa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="radio"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .radio-label {
+            margin-right: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Cadastrar Pessoa</h1>
+    <form action="/salvarPessoa" method="post" th:object="${pessoa}">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" th:field="*{nome}" id="nome" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="cidade">Cidade:</label>
+            <input type="text" th:field="*{cidade}" id="cidade" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            <input type="text" th:field="*{estado}" id="estado" required/>
+        </div>
+
+        <div class="form-group">
+            <label>Tipo:</label>
+            <label class="radio-label">
+                <input type="radio" th:field="*{isCliente}" value="true" /> Cliente
+            </label>
+            <label class="radio-label">
+                <input type="radio" th:field="*{isCliente}" value="false" /> Fornecedor
+            </label>
+        </div>
+
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+</body>
+</html>
