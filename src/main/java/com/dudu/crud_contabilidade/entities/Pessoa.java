@@ -69,7 +69,7 @@ public class Pessoa {
     }
 
     public void setIsCliente(boolean isCliente) {
-        isCliente = isCliente;
+        this.isCliente = isCliente;
     }
 
     @Override

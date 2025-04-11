@@ -47,8 +47,18 @@
             background-color: #f2f2f2;
         }
 
-        button {
+        .btnEditar {
             background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btnDeletar {
+            background-color: red;
             color: white;
             border: none;
             padding: 12px 20px;
@@ -68,11 +78,28 @@
     <h1>Listar Pessoas</h1>
     <table>
         <thead>
-        <tr th:each="p: ${pessoas}">
-            <th>Nome</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Tipo</th>
+        <tr>
+            <th>Nome:</th>
+            <th>Cidade:</th>
+            <th>Estado:</th>
+            <th>É cliente?</th>
         </tr>
-        </thead>
         <tbody>
+        <tr th:each="p : ${pessoa}">
+            <td th:text="${p.nome}"></td>
+            <td th:text="${p.cidade}"></td>
+            <td th:text="${p.estado}"></td>
+            <td th:text="${p.isCliente}"></td>
+            <td>
+                <form th:action="@{/pessoa/editar/{codigo}(codigo=${p.codigo})}" method="get" style="display:inline;">
+                    <button class="btnEditar" type="submit">Editar</button>
+                </form>
+                <form th:action="@{/pessoa/deletar/{codigo}(codigo=${p.codigo})}" method="get" style="display:inline;">
+                    <button class="btnDeletar" type="submit" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -81,7 +81,7 @@
 <body>
 <div class="container">
     <h1>Cadastrar Pessoa</h1>
-    <form action="/salvarPessoa" method="post" th:object="${pessoa}">
+    <form action="/pessoa" method="post" th:object="${pessoa}">
         <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" th:field="*{nome}" id="nome" required/>

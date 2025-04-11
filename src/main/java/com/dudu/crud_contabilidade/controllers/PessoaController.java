@@ -5,10 +5,7 @@ import org.springframework.ui.Model;
 import com.dudu.crud_contabilidade.entities.Pessoa;
 import com.dudu.crud_contabilidade.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/pessoa")
@@ -29,11 +26,24 @@ public class PessoaController {
         return "redirect:/pessoa/listarPessoas";
     }
 
-    @GetMapping
+    @GetMapping("/listarPessoas")
     public String listarPessoas(Model model) {
         model.addAttribute("pessoa", pessoaRepository.findAll());
         return "listaPessoas";
     }
 
+    @GetMapping("/deletar/{codigo}")
+    public String deletar(@PathVariable Long codigo) {
+        pessoaRepository.deleteById(codigo);
 
+        return "redirect:/pessoa/listarPessoas";
+    }
+
+    @GetMapping("/editar/{codigo}")
+    public String editar(@PathVariable Long codigo, Model model) {
+        Pessoa pessoa = pessoaRepository.findById(codigo).get();
+        model.addAttribute("pessoa", pessoa);
+
+        return "editarPessoa";
+    }
 }
